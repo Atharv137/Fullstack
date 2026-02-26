@@ -1,3 +1,4 @@
+//All imports
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 import Header from './components/layout/Header';
@@ -11,6 +12,7 @@ import NotFound from './pages/NotFound';
 
 import './App.css';
 
+// fuction app
 function App() {
   return (
     <BrowserRouter>
