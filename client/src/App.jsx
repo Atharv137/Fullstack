@@ -30,5 +30,6 @@ function App() {
     </BrowserRouter>
   );
 }
+console.log("Hello World!");
 
 export default App;
