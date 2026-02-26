@@ -6,10 +6,7 @@
     "dev": "nodemon server.js"
   },
   "dependencies": {
-<<<<<<< HEAD
-=======
     "bcrypt": "^6.0.0",
->>>>>>> feature/frontend-foundation
     "cors": "^2.8.5",
     "dotenv": "^16.4.5",
     "express": "^4.19.2",
@@ -18,8 +15,4 @@
   "devDependencies": {
     "nodemon": "^3.1.0"
   }
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> feature/frontend-foundation
