@@ -1,3 +1,4 @@
+import ConnectionTest from '../components/common/ConnnectionTest';  
 import { Link } from 'react-router-dom';
 import './Home.css';
 
@@ -78,6 +79,10 @@ function Home() {
                     <p>Join thousands of creators publishing on CreatorHub today.</p>
                     <Link to="/register" className="btn btn-primary">Create Your Account</Link>
                 </div>
+            </section>
+              {/* Backend Connection Test */}
+            <section style={{ padding: "40px", textAlign: "center" }}>
+                <ConnectionTest />
             </section>
         </main>
     );
