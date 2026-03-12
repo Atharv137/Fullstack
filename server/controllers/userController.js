@@ -1,5 +1,12 @@
 import bcrypt from 'bcrypt';
+import jwt from 'jsonwebtoken';
 import User from '../models/User.js';
+
+const generateToken = (id) => {
+    return jwt.sign({ id }, process.env.JWT_SECRET || 'secret123', {
+        expiresIn: '30d',
+    });
+};
 
 // @desc    Register a new user
 // @route   POST /api/users/register
@@ -34,6 +41,7 @@ export const registerUser = async (req, res) => {
             _id: user._id,
             name: user.name,
             email: user.email,
+            token: generateToken(user._id),
             createdAt: user.createdAt,
             updatedAt: user.updatedAt,
         });
@@ -45,6 +53,31 @@ export const registerUser = async (req, res) => {
             const messages = Object.values(error.errors).map((e) => e.message);
             return res.status(400).json({ message: messages.join(', ') });
         }
+        res.status(500).json({ message: 'Server error', error: error.message });
+    }
+};
+
+// @desc    Authenticate a user
+// @route   POST /api/users/login
+// @access  Public
+export const loginUser = async (req, res) => {
+    try {
+        const { email, password } = req.body;
+
+        // Check for user email
+        const user = await User.findOne({ email }).select('+password');
+
+        if (user && (await bcrypt.compare(password, user.password))) {
+            res.json({
+                _id: user.id,
+                name: user.name,
+                email: user.email,
+                token: generateToken(user._id),
+            });
+        } else {
+            res.status(401).json({ message: 'Invalid credentials' });
+        }
+    } catch (error) {
         res.status(500).json({ message: 'Server error', error: error.message });
     }
 };
