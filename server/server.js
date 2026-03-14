@@ -6,6 +6,7 @@ import cors from 'cors';
 import connectDB from './config/db.js';
 import userRoutes from './routes/userRoutes.js';
 import postRoutes from './routes/postRoutes.js';
+import uploadRoutes from './routes/upload.js';
 
 // Load environment variables
 dotenv.config();
@@ -51,6 +52,9 @@ app.use('/api/users', userRoutes);
 
 // Post routes
 app.use('/api/posts', postRoutes);
+
+// Upload routes
+app.use('/api/upload', uploadRoutes);
 
 // 404 handler
 app.use((req, res) => {
